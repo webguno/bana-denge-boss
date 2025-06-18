@@ -1,1 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANA DENGE BOSS | Cyber Digital Agency</title>
+    <style>
+        /* === CYBERPUNK THEME === */
+        :root {
+            --neon-pink: #ff2a6d;
+            --neon-blue: #05d9e8;
+            --neon-purple: #d300c5;
+            --neon-green: #00ff9d;
+            --dark-bg: #0d0221;
+            --glow-text: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            --glow-pink: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+            --glow-purple: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
+            --scanline: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 1px,
+                rgba(5, 217, 232, 0.1) 1px,
+                rgba(5, 217, 232, 0.1) 2px
+            );
+        }
 
+        /* === BASE STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: var(--dark-bg);
+            color: white;
+            font-family: 'Rajdhani', 'Courier New', monospace;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--scanline);
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.3;
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 70%, var(--dark-bg) 100%);
+            animation: flicker 5s infinite alternate;
+            pointer-events: none;
+            z-index: 1001;
+        }
+
+        /* === GLOWING TEXT & ELEMENTS === */
+        h1, h2, h3, .neon-text {
+            text-shadow: var(--glow-text);
+            color: var(--neon-blue);
+        }
+        .neon-pink { text-shadow: var(--glow-pink); color: var(--neon-pink); }
+        .neon-purple { text-shadow: var(--glow-purple); color: var(--neon-purple); }
+        .neon-green { text-shadow: 0 0 10px var(--neon-green); color: var(--neon-green); }
+
+        /* === CYBERPUNK GRID LAYOUT === */
+        .cyber-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+        .cyber-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* === HEADER - GLITCH EFFECT === */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(13, 2, 33, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        .logo::before, .logo::after {
+            content: "BANA DENGE BOSS";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+        }
+        .logo::before {
+            color: var(--neon-pink);
+            z-index: -1;
+            animation: glitch-effect 3s infinite;
+        }
+        .logo::after {
+            color: var(--neon-green);
+            z-index: -2;
+            animation: glitch-effect 2s infinite reverse;
+        }
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+
+        /* === CYBER BUTTONS === */
+        .cyber-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            z-index: 1;
+        }
+        .cyber-btn:hover {
+            color: var(--dark-bg);
+            text-shadow: none;
+        }
+        .cyber-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-blue);
+            transition: all 0.4s;
+            z-index: -1;
+        }
+        .cyber-btn:hover::before {
+            left: 0;
+        }
+        .cyber-btn.pink {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+        .cyber-btn.pink::before {
+            background: var(--neon-pink);
+        }
+
+        /* === HERO SECTION - MATRIX EFFECT === */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%2305d9e8" opacity="0.05" width="10" height="10" x="0" y="0"/></svg>') 0 0 / 20px 20px;
+            opacity: 0.3;
+        }
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        /* === CYBER CARD EFFECTS === */
+        .cyber-card {
+            background: rgba(5, 217, 232, 0.05);
+            border: 1px solid var(--neon-blue);
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        .cyber-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(5, 217, 232, 0.1), transparent);
+            transition: all 0.6s;
+        }
+        .cyber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(5, 217, 232, 0.2);
+        }
+        .cyber-card:hover::before {
+            left: 100%;
+        }
+
+        /* === BINARY RAIN ANIMATION === */
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .binary-digit {
+            position: absolute;
+            color: var(--neon-green);
+            font-size: 16px;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .cyber-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Binary Rain Animation -->
+    <div class="binary-rain" id="binaryRain"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="cyber-container">
+            <div class="logo">BANA DENGE BOSS</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="cyber-container">
+            <div class="hero-content">
+                <h1>WE BUILD <span class="neon-pink">DIGITAL FUTURES</span></h1>
+                <p class="neon-green">Your vision. Our code. <span class="neon-purple">Unstoppable results.</span></p>
+                <a href="#contact" class="cyber-btn">HACK INTO SUCCESS</a>
+                <a href="#services" class="cyber-btn pink">EXPLORE SERVICES</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" style="padding: 100px 0;">
+        <div class="cyber-container">
+            <h2 style="margin-bottom: 50px; text-align: center;"><span class="neon-pink">///</span> OUR SERVICES <span class="neon-pink">///</span></h2>
+            <div class="cyber-grid">
+                <div class="cyber-card">
+                    <h3 class="neon-blue">> WEB3 DEVELOPMENT</h3>
+                    <p>Decentralized apps that run on the blockchain. Future-proof your business.</p>
+                </div>
+                <div class="cyber-card">
+                    <h3 class="neon-pink">> CYBER MARKETING</h3>
+                    <p>AI-driven campaigns that target with laser precision. Dominate your niche.</p>
+                </div>
+                <div class="cyber-card">
+                    <h3 class="neon-green">> AI AUTOMATION</h3>
+                    <p>Smart systems that learn and adapt. Your 24/7 digital workforce.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" style="background: rgba(5, 217, 232, 0.03); padding: 100px 0; border-top: 1px solid var(--neon-blue); border-bottom: 1px solid var(--neon-blue);">
+        <div class="cyber-container">
+            <div class="cyber-grid">
+                <div>
+                    <h2 style="margin-bottom: 30px;"><span class="neon-purple">WHO_WE_ARE</span></h2>
+                    <p>A collective of digital rebels, coders, and strategists building the next generation of web experiences.</p>
+                    <p style="margin-top: 20px;" class="neon-green">> No bureaucracy. Just results.</p>
+                </div>
+                <div>
+                    <div class="cyber-card">
+                        <h3 class="neon-blue">> OUR MISSION</h3>
+                        <p>To disrupt traditional digital agencies with cutting-edge tech and radical transparency.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact" style="padding: 100px 0;">
+        <div class="cyber-container">
+            <h2 style="margin-bottom: 50px; text-align: center;"><span class="neon-pink">+++</span> JOIN THE CYBER REVOLUTION <span class="neon-pink">+++</span></h2>
+            <div class="cyber-card" style="max-width: 600px; margin: 0 auto;">
+                <h3 style="margin-bottom: 20px;" class="neon-blue">> SEND_US_A_MESSAGE</h3>
+                <form>
+                    <input type="text" placeholder="YOUR_NAME" style="width: 100%; padding: 15px; margin-bottom: 20px; background: rgba(5, 217, 232, 0.1); border: 1px solid var(--neon-blue); color: white; font-family: 'Courier New', monospace;">
+                    <input type="email" placeholder="YOUR_EMAIL" style="width: 100%; padding: 15px; margin-bottom: 20px; background: rgba(5, 217, 232, 0.1); border: 1px solid var(--neon-blue); color: white; font-family: 'Courier New', monospace;">
+                    <textarea placeholder="YOUR_MESSAGE" style="width: 100%; padding: 15px; margin-bottom: 20px; background: rgba(5, 217, 232, 0.1); border: 1px solid var(--neon-blue); color: white; font-family: 'Courier New', monospace; min-height: 150px;"></textarea>
+                    <button type="submit" class="cyber-btn" style="width: 100%;">TRANSMIT</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 50px 0; text-align: center; border-top: 1px solid var(--neon-blue);">
+        <div class="cyber-container">
+            <p class="neon-green">BANA DENGE BOSS © 2025</p>
+            <p style="margin-top: 20px; opacity: 0.7;">ALL SYSTEMS OPERATIONAL</p>
+        </div>
+    </footer>
+
+    <script>
+        // Binary Rain Effect
+        const binaryRain = document.getElementById('binaryRain');
+        const chars = "01";
+        
+        function createBinary() {
+            const binaryDigit = document.createElement('div');
+            binaryDigit.className = 'binary-digit';
+            binaryDigit.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
+            binaryDigit.style.left = Math.random() * 100 + 'vw';
+            binaryDigit.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            binaryDigit.style.opacity = Math.random();
+            binaryRain.appendChild(binaryDigit);
+            
+            setTimeout(() => {
+                binaryDigit.remove();
+            }, 5000);
+        }
+        
+        setInterval(createBinary, 100);
+
+        // Glitch Effect on Hover
+        const glitchElements = document.querySelectorAll('.cyber-card, .cyber-btn');
+        glitchElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.animation = 'glitch-effect 0.5s';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.animation = 'none';
+            });
+        });
+
+        // Cyberpunk Scanline Effect
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.body.style.setProperty('--scanline', `
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0px,
+                    transparent 1px,
+                    rgba(5, 217, 232, ${0.05 + y * 0.1}) 1px,
+                    rgba(5, 217, 232, ${0.05 + y * 0.1}) 2px
+                )
+            `);
+        });
+    </script>
+</body>
+</html>
